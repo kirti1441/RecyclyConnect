@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            float: left;
+            margin: 5px 0;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #0072ff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0072ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My Profile</h2>
+        <form action="UpdateProfile" method="post">
+            <label>Email</label>
+            <input type="email" name="email" id="email" readonly>
+            
+            <label>Mobile</label>
+            <input type="text" name="mobile" id="mobile" required>
+            
+            <label>Password</label>
+            <input type="password" name="password" id="password" required>
+            
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+
+    <script>
+        // ✅ Load User Data from Server (Servlet)
+        window.onload = function() {
+            fetch("FetchProfile", { method: "GET" })
+                .then(response => response.text())
+                .then(data => {
+                    let userDetails = data.split(",");
+                    document.getElementById("email").value = userDetails[0];
+                    document.getElementById("mobile").value = userDetails[1];
+                    document.getElementById("password").value = userDetails[2];
+                });
+        };
+    </script>
+</body>
+</html>
